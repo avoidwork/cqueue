@@ -1,7 +1,7 @@
 {
   "name": "cqueue",
   "description": "Channel queue with Promises",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "http://avoidwork.github.io/cqueue",
   "author": {
     "name": "Jason Mulligan",
