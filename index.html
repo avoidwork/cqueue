@@ -42,15 +42,23 @@
     <span class="nx">chan</span>   <span class="o">=</span> <span class="nx">cqueue</span><span class="p">();</span>
 
 <span class="nx">chan</span><span class="p">.</span><span class="nx">take</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span> <span class="nx">arg</span> <span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span> <span class="nx">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">===</span> <span class="kc">null</span> <span class="p">)</span> <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"empty"</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nx">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">"pause"</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"empty"</span><span class="p">);</span> <span class="c1">// this runs</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
     <span class="p">}</span>
 <span class="p">});</span>
 
 <span class="nx">chan</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s2">"hello world"</span><span class="p">);</span>
 
 <span class="nx">chan</span><span class="p">.</span><span class="nx">take</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span> <span class="nx">arg</span> <span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">arg</span> <span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span> <span class="nx">arg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">"pause"</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"empty"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>  <span class="c1">// this runs (hello world)</span>
+    <span class="p">}</span>
 <span class="p">});</span>
 </pre></div>
 
