@@ -2,6 +2,8 @@
 
 <p>cqueue is a Channel queue for holding a msg/value until it's taken. Promises are used for concurrent operations against the queue.</p>
 
+<p><a href="http://travis-ci.org/avoidwork/cqueue"><img src="https://secure.travis-ci.org/avoidwork/cqueue.png" alt="build status" title="" /></a></p>
+
 <h2 id="how-do-i-use-it">How do I use it?</h2>
 
 <p>Put something in the queue, and then take it at some point in the future. The queue can only hold 1 value, and the response will indicate what your machine should do, i.e. "continue" or "pause".</p>
@@ -10,15 +12,23 @@
     chan   = cqueue();
 
 chan.take().then(function ( arg ) {
-    if ( arg[1] === null ) {
-        console.log("empty");
+    if ( arg[0] === "pause" ) {
+        console.log("empty"); // this runs
+    }
+    else {
+        console.log(arg[1]);
     }
 });
 
 chan.put("hello world");
 
 chan.take().then(function ( arg ) {
-    console.log( arg );
+    if ( arg[0] === "pause" ) {
+        console.log("empty");
+    }
+    else {
+        console.log(arg[1]);  // this runs (hello world)
+    }
 });
 </code></pre>
 
