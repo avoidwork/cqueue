@@ -13,15 +13,23 @@ var cqueue = require("cqueue"),
     chan   = cqueue();
 
 chan.take().then(function ( arg ) {
-	if ( arg[1] === null ) {
-		console.log("empty");
+	if ( arg[0] === "pause" ) {
+		console.log("empty"); // this runs
+	}
+	else {
+		console.log(arg[1]);
 	}
 });
 
 chan.put("hello world");
 
 chan.take().then(function ( arg ) {
-	console.log( arg );
+	if ( arg[0] === "pause" ) {
+		console.log("empty");
+	}
+	else {
+		console.log(arg[1]);  // this runs (hello world)
+	}
 });
 ```
 
