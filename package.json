@@ -1,0 +1,45 @@
+{
+  "name": "cqueue",
+  "description": "Channel queue with Promises",
+  "version": "0.1.0",
+  "homepage": "http://avoidwork.github.io/cqueue",
+  "author": {
+    "name": "Jason Mulligan",
+    "email": "jason.mulligan@avoidwork.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/avoidwork/cqueue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/avoidwork/cqueue/issues"
+  },
+  "licenses": [
+    {
+      "type": "BSD-3",
+      "url": "https://raw.github.com/avoidwork/cqueue/master/LICENSE"
+    }
+  ],
+  "main": "lib/cqueue",
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "assure": "~1.0.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-contrib-jshint": "~0.1",
+    "grunt-contrib-nodeunit": "~0.1.2",
+    "grunt-contrib-watch": "~0.2"
+  },
+  "keywords": [
+    "channel",
+    "queue",
+    "async"
+  ]
+}

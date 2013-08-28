@@ -1,0 +1,77 @@
+<!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="README.md"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">README.md</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="cqueue">cqueue</h1>
+
+<p>cqueue is a Channel queue for holding a msg/value until it's taken. Promises are used for concurrent operations against the queue.</p>
+
+<h2 id="how-do-i-use-it">How do I use it?</h2>
+
+<p>Put something in the queue, and then take it at some point in the future. The queue can only hold 1 value, and the response will indicate what your machine should do, i.e. "continue" or "pause".</p>
+
+<pre><code class="javascript">var cqueue = require("cqueue"),
+    chan   = cqueue();
+
+chan.take().then(function ( arg ) {
+    if ( arg[1] === null ) {
+        console.log("empty");
+    }
+});
+
+chan.put("hello world");
+
+chan.take().then(function ( arg ) {
+    console.log( arg );
+});
+</code></pre>
+
+<h2 id="api">API</h2>
+
+<h3 id="queue">queue</h3>
+
+<h4 id="property">Property</h4>
+
+<p>Array which can hold 1 value</p>
+
+<h3 id="put">put</h3>
+
+<h4 id="method">Method</h4>
+
+<p>Puts an item into the Channel</p>
+
+<pre><code> method put
+ param  {Mixed} arg Item
+ return {Array}     Deferred
+</code></pre>
+
+<pre><code class="javascript">chan.put(arg).then(function(state) {
+    if (state[0] === "continue") {
+        // arg was added to the channel
+    }
+    else {
+        // arg is not in the channel
+    }
+});
+</code></pre>
+
+<h3 id="take">take</h3>
+
+<h4 id="method">Method</h4>
+
+<p>Takes an item from the Channel</p>
+
+<pre><code>method take
+ return {Array} Deferred
+</code></pre>
+
+<pre><code class="javascript">chan.take().then(function(state) {
+    if (state[0] === "continue") {
+        // state[1] was taken from the channel
+    }
+    else {
+        // state[1] is null
+    }
+});
+</code></pre>
+
+<h2 id="license">License</h2>
+
+<p>Copyright (c) 2013 Jason Mulligan <br />
+Licensed under the BSD-3 license.</p></div></div></div></div></body></html>
