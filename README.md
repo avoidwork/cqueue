@@ -2,6 +2,8 @@
 
 cqueue is a Channel queue for holding a msg/value until it's taken. Promises are used for concurrent operations against the queue.
 
+[![build status](https://secure.travis-ci.org/avoidwork/cqueue.png)](http://travis-ci.org/avoidwork/cqueue)
+
 ## How do I use it?
 
 Put something in the queue, and then take it at some point in the future. The queue can only hold 1 value, and the response will indicate what your machine should do, i.e. "continue" or "pause".
