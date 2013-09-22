@@ -1,44 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="cqueue : Channel queue with Promises" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>cqueue by avoidwork</title>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>cqueue</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
   </head>
-
   <body>
+    <div class="wrapper">
+      <header>
+        <h1>cqueue</h1>
+        <p>Channel queue with Promises</p>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/avoidwork/cqueue">View on GitHub</a>
+        <p class="view"><a href="https://github.com/avoidwork/cqueue">View the Project on GitHub <small>avoidwork/cqueue</small></a></p>
 
-          <h1 id="project_title">cqueue</h1>
-          <h2 id="project_tagline">Channel queue with Promises</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/avoidwork/cqueue/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/avoidwork/cqueue/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+        <ul>
+          <li><a href="https://github.com/avoidwork/cqueue/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/avoidwork/cqueue/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/avoidwork/cqueue">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a name="what-is-it" class="anchor" href="#what-is-it"><span class="octicon octicon-link"></span></a>What is it?</h2>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <p>cqueue is a Channel queue for holding a msg/value until it's taken. Promises are used for concurrent operations against the queue.</p>
+<p>cqueue is a Channel queue for holding a msg/value until it's taken. Promises are used for concurrent operations against the queue.</p>
 
 <h2>
 <a name="how-do-i-use-it" class="anchor" href="#how-do-i-use-it"><span class="octicon octicon-link"></span></a>How do I use it?</h2>
 
 <p>Put something in the queue, and then take it at some point in the future. The queue can only hold 1 value, and the response will indicate what your machine should do, i.e. "continue" or "pause".</p>
 
-<div class="highlight"><pre><span class="kd">var</span> <span class="nx">cqueue</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"cqueue"</span><span class="p">),</span>
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">cqueue</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"cqueue"</span><span class="p">),</span>
     <span class="nx">chan</span>   <span class="o">=</span> <span class="nx">cqueue</span><span class="p">();</span>
 
 <span class="nx">chan</span><span class="p">.</span><span class="nx">take</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span> <span class="nx">arg</span> <span class="p">)</span> <span class="p">{</span>
@@ -86,7 +86,7 @@ param  {Mixed} arg Item
 return {Array}     Deferred
 </code></pre>
 
-<div class="highlight"><pre><span class="nx">chan</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">arg</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">chan</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">arg</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">"continue"</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// arg was added to the channel</span>
     <span class="p">}</span>
@@ -108,7 +108,7 @@ return {Array}     Deferred
 return {Array} Deferred
 </code></pre>
 
-<div class="highlight"><pre><span class="nx">chan</span><span class="p">.</span><span class="nx">take</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight highlight-javascript"><pre><span class="nx">chan</span><span class="p">.</span><span class="nx">take</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">state</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">===</span> <span class="s2">"continue"</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// state[1] was taken from the channel</span>
     <span class="p">}</span>
@@ -124,17 +124,12 @@ return {Array} Deferred
 <p>Copyright (c) 2013 Jason Mulligan<br>
 Licensed under the BSD-3 license.</p>
       </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">cqueue maintained by <a href="https://github.com/avoidwork">avoidwork</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/avoidwork">avoidwork</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
-
+    <script src="javascripts/scale.fix.js"></script>
     
-
   </body>
 </html>
