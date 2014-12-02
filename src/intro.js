@@ -1,4 +1,4 @@
-( function () {
+( function ( global ) {
 "use strict";
 
-var assure = require( "assure" );
+var Promise = require( "es6-promise" ).Promise;

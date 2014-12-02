@@ -30,7 +30,7 @@ Channel.prototype.constructor = Channel;
  * @return {Array}     Deferred
  */
 Channel.prototype.put = function ( arg ) {
-	var defer = assure();
+	var defer = deferred();
 
 	if ( this.queue.length === 0 ) {
 		this.queue.push( arg );
@@ -51,7 +51,7 @@ Channel.prototype.put = function ( arg ) {
  * @return {Array} Deferred
  */
 Channel.prototype.take = function () {
-	var defer = assure();
+	var defer = deferred();
 
 	if ( this.queue.length === 0 ) {
 		defer.resolve( ["pause", null] );
@@ -62,3 +62,10 @@ Channel.prototype.take = function () {
 
 	return defer;
 };
+
+/**
+ * Version property
+ *
+ * @type {String}
+ */
+Channel.prototype.version = "{{VERSION}}";

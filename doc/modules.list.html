@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>keigai Index</title>
+	<title>keigai Modules</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -71,94 +71,77 @@
 					
 
 
-	
-	<span class="page-title">Index</span>
-	
-	
+	<h1 class="page-title">Modules</h1>
+<section>
+
+<header>
+    <h2>
+    
+    </h2>
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+
+        
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
 
 
+        
+    
+    </div>
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
+</article>
 
-	
-	
-
-
-
-
-
-    <section>
-        <article><h1>cqueue</h1>
-<p>cqueue is a Channel queue for holding a msg/value until it's taken. Promises are used for concurrent operations against the queue.</p>
-<p><a href="http://travis-ci.org/avoidwork/cqueue"><img src="https://secure.travis-ci.org/avoidwork/cqueue.png" alt="build status"></a></p>
-<h2>How do I use it?</h2>
-<p>Put something in the queue, and then take it at some point in the future. The queue can only hold 1 value, and the response will indicate what your machine should do, i.e. &quot;continue&quot; or &quot;pause&quot;.</p>
-<pre><code class="lang-javascript">var cqueue = require(&quot;cqueue&quot;),
-    chan   = cqueue();
-
-chan.take().then(function ( arg ) {
-    if ( arg[0] === &quot;pause&quot; ) {
-        console.log(&quot;empty&quot;); // this runs
-    }
-    else {
-        console.log(arg[1]);
-    }
-});
-
-chan.put(&quot;hello world&quot;);
-
-chan.take().then(function ( arg ) {
-    if ( arg[0] === &quot;pause&quot; ) {
-        console.log(&quot;empty&quot;);
-    }
-    else {
-        console.log(arg[1]);  // this runs (hello world)
-    }
-});</code></pre>
-<h2>API</h2>
-<h3>queue</h3>
-<h4>Property</h4>
-<p>Array which can hold 1 value</p>
-<h3>put</h3>
-<h4>Method</h4>
-<p> Puts an item into the Channel</p>
-<pre><code> method put
- param  {Mixed} arg Item
- return {Array}     Deferred</code></pre>
-<pre><code class="lang-javascript">chan.put(arg).then(function(state) {
-    if (state[0] === &quot;continue&quot;) {
-        // arg was added to the channel
-    }
-    else {
-        // arg is not in the channel
-    }
-});</code></pre>
-<h3>take</h3>
-<h4>Method</h4>
-<p>Takes an item from the Channel</p>
-<pre><code>method take
- return {Array} Deferred</code></pre>
-<pre><code class="lang-javascript">chan.take().then(function(state) {
-    if (state[0] === &quot;continue&quot;) {
-        // state[1] was taken from the channel
-    }
-    else {
-        // state[1] is null
-    }
-});</code></pre>
-<h2>License</h2>
-<p>Copyright (c) 2013 Jason Mulligan<br>Licensed under the BSD-3 license.</p></article>
-    </section>
-
-
-
+</section>
 
 
 

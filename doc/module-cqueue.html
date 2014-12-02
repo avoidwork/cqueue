@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>keigai Index</title>
+	<title>keigai Module: cqueue</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -71,94 +71,100 @@
 					
 
 
-	
-	<span class="page-title">Index</span>
-	
-	
+	<h1 class="page-title">Module: cqueue</h1>
+<section>
+
+<header>
+    <h2>
+    cqueue
+    </h2>
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+
+    
+        
+            <div class="description"><p>cqueue</p></div>
+        
+
+        
+<dl class="details">
+    
+
+    
+    <dt class="tag-version">Version:</dt>
+    <dd class="tag-version"><ul class="dummy"><li>0.1.2</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:jason.mulligan@avoidwork.com">Jason Mulligan</a></li>
+        </ul>
+    </dd>
+    
+
+    
+    <dt class="tag-copyright">Copyright:</dt>
+    <dd class="tag-copyright"><ul class="dummy"><li>2014 Jason Mulligan</li></ul></dd>
+    
+
+    
+    <dt class="tag-license">License:</dt>
+    <dd class="tag-license"><ul class="dummy"><li>BSD-3 <https://raw.github.com/avoidwork/cqueue/master/LICENSE></li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="cqueue.js.html">cqueue.js</a>, <a href="cqueue.js.html#sunlight-1-line-1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
 
 
+        
+    
+    </div>
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
 
+    
+</article>
 
-	
-	
-
-
-
-
-
-    <section>
-        <article><h1>cqueue</h1>
-<p>cqueue is a Channel queue for holding a msg/value until it's taken. Promises are used for concurrent operations against the queue.</p>
-<p><a href="http://travis-ci.org/avoidwork/cqueue"><img src="https://secure.travis-ci.org/avoidwork/cqueue.png" alt="build status"></a></p>
-<h2>How do I use it?</h2>
-<p>Put something in the queue, and then take it at some point in the future. The queue can only hold 1 value, and the response will indicate what your machine should do, i.e. &quot;continue&quot; or &quot;pause&quot;.</p>
-<pre><code class="lang-javascript">var cqueue = require(&quot;cqueue&quot;),
-    chan   = cqueue();
-
-chan.take().then(function ( arg ) {
-    if ( arg[0] === &quot;pause&quot; ) {
-        console.log(&quot;empty&quot;); // this runs
-    }
-    else {
-        console.log(arg[1]);
-    }
-});
-
-chan.put(&quot;hello world&quot;);
-
-chan.take().then(function ( arg ) {
-    if ( arg[0] === &quot;pause&quot; ) {
-        console.log(&quot;empty&quot;);
-    }
-    else {
-        console.log(arg[1]);  // this runs (hello world)
-    }
-});</code></pre>
-<h2>API</h2>
-<h3>queue</h3>
-<h4>Property</h4>
-<p>Array which can hold 1 value</p>
-<h3>put</h3>
-<h4>Method</h4>
-<p> Puts an item into the Channel</p>
-<pre><code> method put
- param  {Mixed} arg Item
- return {Array}     Deferred</code></pre>
-<pre><code class="lang-javascript">chan.put(arg).then(function(state) {
-    if (state[0] === &quot;continue&quot;) {
-        // arg was added to the channel
-    }
-    else {
-        // arg is not in the channel
-    }
-});</code></pre>
-<h3>take</h3>
-<h4>Method</h4>
-<p>Takes an item from the Channel</p>
-<pre><code>method take
- return {Array} Deferred</code></pre>
-<pre><code class="lang-javascript">chan.take().then(function(state) {
-    if (state[0] === &quot;continue&quot;) {
-        // state[1] was taken from the channel
-    }
-    else {
-        // state[1] is null
-    }
-});</code></pre>
-<h2>License</h2>
-<p>Copyright (c) 2013 Jason Mulligan<br>Licensed under the BSD-3 license.</p></article>
-    </section>
-
-
-
+</section>
 
 
 

@@ -2,8 +2,10 @@
 /node_modules/
 /test/
 /src/
+/.idea/
 .git
 .gitignore
 .jshintrc
 .travis.yml
 Gruntfile.js
+docstrap.json

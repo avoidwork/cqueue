@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>keigai Index</title>
+	<title>keigai Source: cqueue.js</title>
 
 	<!--[if lt IE 9]>
 	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -65,99 +65,145 @@
 	<div class="row-fluid">
 
 		
-		<div class="span8">
-			
+			<div class="span12">
+				
 				<div id="main">
 					
 
 
-	
-	<span class="page-title">Index</span>
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-	
-	
-
-
-
-
-
+		<h1 class="page-title">Source: cqueue.js</h1>
+    
     <section>
-        <article><h1>cqueue</h1>
-<p>cqueue is a Channel queue for holding a msg/value until it's taken. Promises are used for concurrent operations against the queue.</p>
-<p><a href="http://travis-ci.org/avoidwork/cqueue"><img src="https://secure.travis-ci.org/avoidwork/cqueue.png" alt="build status"></a></p>
-<h2>How do I use it?</h2>
-<p>Put something in the queue, and then take it at some point in the future. The queue can only hold 1 value, and the response will indicate what your machine should do, i.e. &quot;continue&quot; or &quot;pause&quot;.</p>
-<pre><code class="lang-javascript">var cqueue = require(&quot;cqueue&quot;),
-    chan   = cqueue();
+        <article>
+            <pre class="sunlight-highlight-javascript linenums">/**
+ * cqueue
+ *
+ * @author Jason Mulligan &lt;jason.mulligan@avoidwork.com>
+ * @copyright 2014 Jason Mulligan
+ * @license BSD-3 &lt;https://raw.github.com/avoidwork/cqueue/master/LICENSE>
+ * @link http://avoidwork.github.io/cqueue
+ * @module cqueue
+ * @version 0.1.2
+ */
+( function ( global ) {
+"use strict";
 
-chan.take().then(function ( arg ) {
-    if ( arg[0] === &quot;pause&quot; ) {
-        console.log(&quot;empty&quot;); // this runs
-    }
-    else {
-        console.log(arg[1]);
-    }
-});
+var Promise = require( "es6-promise" ).Promise;
 
-chan.put(&quot;hello world&quot;);
+/**
+ * "Unboxed" Promise factory
+ *
+ * @method factory
+ * @memberOf promise
+ * @return {Object} {@link Promise}
+ */
+function deferred () {
+	var promise, pCatch, pResolve, pReject, pThen;
 
-chan.take().then(function ( arg ) {
-    if ( arg[0] === &quot;pause&quot; ) {
-        console.log(&quot;empty&quot;);
-    }
-    else {
-        console.log(arg[1]);  // this runs (hello world)
-    }
-});</code></pre>
-<h2>API</h2>
-<h3>queue</h3>
-<h4>Property</h4>
-<p>Array which can hold 1 value</p>
-<h3>put</h3>
-<h4>Method</h4>
-<p> Puts an item into the Channel</p>
-<pre><code> method put
- param  {Mixed} arg Item
- return {Array}     Deferred</code></pre>
-<pre><code class="lang-javascript">chan.put(arg).then(function(state) {
-    if (state[0] === &quot;continue&quot;) {
-        // arg was added to the channel
-    }
-    else {
-        // arg is not in the channel
-    }
-});</code></pre>
-<h3>take</h3>
-<h4>Method</h4>
-<p>Takes an item from the Channel</p>
-<pre><code>method take
- return {Array} Deferred</code></pre>
-<pre><code class="lang-javascript">chan.take().then(function(state) {
-    if (state[0] === &quot;continue&quot;) {
-        // state[1] was taken from the channel
-    }
-    else {
-        // state[1] is null
-    }
-});</code></pre>
-<h2>License</h2>
-<p>Copyright (c) 2013 Jason Mulligan<br>Licensed under the BSD-3 license.</p></article>
+	promise = new Promise( function ( resolve, reject ) {
+		pResolve = resolve;
+		pReject  = reject;
+	} );
+
+	pCatch = function () {
+		return promise["catch"].apply( promise, arguments );
+	};
+
+	pThen = function () {
+		return promise.then.apply( promise, arguments );
+	};
+
+	return {"catch": pCatch, resolve: pResolve, reject: pReject, then: pThen};
+}
+
+/**
+ * Channel factory
+ *
+ * @method channel
+ * @return {Object} Channel instance
+ */
+var channel = function () {
+	return new Channel();
+};
+
+/**
+ * Channel
+ *
+ * @constructor
+ * @private
+ * @namespace abaaso
+ */
+function Channel () {
+	this.queue = [];
+}
+
+// Setting constructor loop
+Channel.prototype.constructor = Channel;
+
+/**
+ * Puts an item into the Channel
+ *
+ * @method put
+ * @param  {Mixed} arg Item
+ * @return {Array}     Deferred
+ */
+Channel.prototype.put = function ( arg ) {
+	var defer = deferred();
+
+	if ( this.queue.length === 0 ) {
+		this.queue.push( arg );
+
+		defer.resolve( ["continue", null] );
+	}
+	else {
+		defer.resolve( ["pause", null] );
+	}
+
+	return defer;
+};
+
+/**
+ * Takes an item from the Channel
+ *
+ * @method take
+ * @return {Array} Deferred
+ */
+Channel.prototype.take = function () {
+	var defer = deferred();
+
+	if ( this.queue.length === 0 ) {
+		defer.resolve( ["pause", null] );
+	}
+	else {
+		defer.resolve( ["continue", this.queue.pop()] );
+	}
+
+	return defer;
+};
+
+/**
+ * Version property
+ *
+ * @type {String}
+ */
+Channel.prototype.version = "0.1.2";
+
+// Node, AMD & window supported
+if ( typeof exports != "undefined" ) {
+	module.exports = channel;
+}
+else if ( typeof define == "function" ) {
+	define( function () {
+		return channel;
+	} );
+}
+else {
+	global.cqueue = channel;
+}
+} )( this );
+</pre>
+        </article>
     </section>
-
-
 
 
 
@@ -181,10 +227,6 @@ chan.take().then(function ( arg ) {
 				</footer>
 			</div>
 
-			
-			<div class="span3">
-				<div id="toc"></div>
-			</div>
 			
 			<br clear="both">
 		</div>
