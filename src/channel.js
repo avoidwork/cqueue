@@ -12,8 +12,6 @@ var channel = function () {
  * Channel
  *
  * @constructor
- * @private
- * @namespace abaaso
  */
 function Channel () {
 	this.queue = [];
@@ -32,9 +30,8 @@ Channel.prototype.constructor = Channel;
 Channel.prototype.put = function ( arg ) {
 	var defer = deferred();
 
-	if ( this.queue.length === 0 ) {
+	if ( !this.queue.length ) {
 		this.queue.push( arg );
-
 		defer.resolve( ["continue", null] );
 	}
 	else {
@@ -53,7 +50,7 @@ Channel.prototype.put = function ( arg ) {
 Channel.prototype.take = function () {
 	var defer = deferred();
 
-	if ( this.queue.length === 0 ) {
+	if ( !this.queue.length ) {
 		defer.resolve( ["pause", null] );
 	}
 	else {

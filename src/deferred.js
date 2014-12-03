@@ -1,9 +1,8 @@
 /**
  * "Unboxed" Promise factory
  *
- * @method factory
- * @memberOf promise
- * @return {Object} {@link Promise}
+ * @method deferred
+ * @return {Object} Deferred
  */
 function deferred () {
 	var promise, pCatch, pResolve, pReject, pThen;

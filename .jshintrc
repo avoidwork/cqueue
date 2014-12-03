@@ -21,22 +21,9 @@
 	"loopfunc": true,
 	"evil": true,
 	"globals": {
-		"localStorage": true,
-		"XMLHttpRequest": true,
 		"require": true,
-		"ActiveXObject": true,
-		"XDomainRequest": true,
-		"Document": true,
-		"Element": true,
-		"CustomEvent": true,
-		"Buffer": true,
-		"HTMLDocument": true,
-		"console": true,
-		"process": true,
 		"module": true,
 		"define": true,
-		"setImmediate": true,
-		"mongodb": true,
-		"format": true
+		"Promise": true
 	}
 }

@@ -4,7 +4,7 @@ module.exports = function (grunt) {
 		concat : {
 			options : {
 				banner : "/**\n" + 
-				         " * <%= pkg.name %>\n" +
+				         " * <%= pkg.description %>\n" +
 				         " *\n" +
 				         " * @author <%= pkg.author.name %> <<%= pkg.author.email %>>\n" +
 				         " * @copyright <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
 				sourceMap: true,
 				sourceMapIncludeSources: true,
 				mangle: {
-					except: ["keigai", "define", "export", "process", "array", "regex", "store", "string", "utility"]
+					except: ["Promise", "Channel", "define", "export"]
 				}
 			},
 			target: {

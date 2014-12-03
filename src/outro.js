@@ -10,4 +10,4 @@ else if ( typeof define == "function" ) {
 else {
 	global.cqueue = channel;
 }
-} )( this );
+} )( this, Promise );
