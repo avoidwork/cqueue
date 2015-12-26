@@ -31,11 +31,11 @@ Array which can hold 1 value
 ### put
 #### Method
 
- Puts an item into the Channel
+ Puts an item into the Channel, and the Promise receives an Array
  
  	method put
  	param  {Mixed} arg Item
- 	return {Array}     Deferred
+ 	return {Object}    Promise
 
 ```javascript
 chan.put(arg).then(function(state) {
@@ -50,10 +50,10 @@ chan.put(arg).then(function(state) {
 ### take
 #### Method
 
-Takes an item from the Channel
+Takes an item from the Channel, and the Promise receives an Array
 
 	method take
- 	return {Array} Deferred
+ 	return {Object} Promise
 
 ```javascript
 chan.take().then(function(state) {
