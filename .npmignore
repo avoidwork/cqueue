@@ -1,11 +1,13 @@
 /doc/
 /node_modules/
+/lib/cqueue.min.js
+/lib/cqueue.min.js.map
 /test/
 /src/
 /.idea/
 .git
 .gitignore
-.jshintrc
+.eslintrc
 .travis.yml
 Gruntfile.js
 docstrap.json

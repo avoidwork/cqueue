@@ -3,43 +3,40 @@ module.exports = function (grunt) {
 		pkg : grunt.file.readJSON("package.json"),
 		concat : {
 			options : {
-				banner : "/**\n" + 
-				         " * <%= pkg.description %>\n" +
-				         " *\n" +
-				         " * @author <%= pkg.author.name %> <<%= pkg.author.email %>>\n" +
-				         " * @copyright <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
-				         " * @license <%= pkg.licenses[0].type %> <<%= pkg.licenses[0].url %>>\n" +
-				         " * @link <%= pkg.homepage %>\n" +
-				         " * @module <%= pkg.name %>\n" +
-				         " * @version <%= pkg.version %>\n" +
-				         " */\n"
+				banner : "/**\n" +
+				" * <%= pkg.description %>\n" +
+				" *\n" +
+				" * @author <%= pkg.author %>\n" +
+				" * @copyright <%= grunt.template.today('yyyy') %>\n" +
+				" * @license <%= pkg.license %>\n" +
+				" * @link <%= pkg.homepage %>\n" +
+				" * @version <%= pkg.version %>\n" +
+				" */\n"
 			},
 			dist : {
 				src : [
 					"src/intro.js",
 					"src/deferred.js",
 					"src/channel.js",
+					"src/factory.js",
 					"src/outro.js"
 				],
-				dest : "lib/<%= pkg.name %>.js"
+				dest : "lib/<%= pkg.name %>.es6.js"
 			}
 		},
-		jsdoc : {
-			dist : {
-				src: ["lib/<%= pkg.name %>.js", "README.md"],
-				options: {
-					destination : "doc",
-					template    : "node_modules/ink-docstrap/template",
-					configure   : "docstrap.json",
-					"private"   : false
+		babel: {
+			options: {
+				sourceMap: false,
+				presets: ["babel-preset-es2015"]
+			},
+			dist: {
+				files: {
+					"lib/<%= pkg.name %>.js": "lib/<%= pkg.name %>.es6.js"
 				}
 			}
 		},
-		jshint : {
-			options : {
-				jshintrc : ".jshintrc"
-			},
-			src : "lib/<%= pkg.name %>.js"
+		eslint: {
+			target: ["lib/<%= pkg.name %>.es6.js"]
 		},
 		nodeunit : {
 			all : ["test/*.js"]
@@ -53,19 +50,19 @@ module.exports = function (grunt) {
 		},
 		uglify: {
 			options: {
-				banner : "/*\n" +
-				" <%= grunt.template.today('yyyy') %> <%= pkg.author.name %>\n" +
-				" @version <%= pkg.version %>\n" +
-				" */",
+				banner: '/* <%= grunt.template.today("yyyy") %> <%= pkg.author %> */\n',
 				sourceMap: true,
 				sourceMapIncludeSources: true,
 				mangle: {
-					except: ["Promise", "Channel", "define", "export"]
+					except: [
+						"Channel",
+						"Promise"
+					]
 				}
 			},
 			target: {
 				files: {
-					"lib/cqueue.min.js" : ["lib/cqueue.js"]
+					"lib/<%= pkg.name %>.min.js" : ["lib/<%= pkg.name %>.js"]
 				}
 			}
 		},
@@ -83,16 +80,15 @@ module.exports = function (grunt) {
 
 	// tasks
 	grunt.loadNpmTasks("grunt-sed");
-	grunt.loadNpmTasks("grunt-jsdoc");
 	grunt.loadNpmTasks("grunt-contrib-concat");
 	grunt.loadNpmTasks("grunt-contrib-nodeunit");
-	grunt.loadNpmTasks("grunt-contrib-jshint");
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
+	grunt.loadNpmTasks("grunt-babel");
+	grunt.loadNpmTasks("grunt-eslint");
 
 	// aliases
-	grunt.registerTask("test", ["nodeunit", "jshint"]);
-	grunt.registerTask("build", ["concat", "sed"]);
-	grunt.registerTask("default", ["build", "test", "uglify"]);
-	grunt.registerTask("package", ["default", "jsdoc"]);
+	grunt.registerTask("test", ["eslint", "nodeunit"]);
+	grunt.registerTask("build", ["concat", "sed", "babel", "uglify"]);
+	grunt.registerTask("default", ["build", "test"]);
 };
