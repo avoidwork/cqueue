@@ -1,5 +1,5 @@
-function factory () {
-	return new Channel();
+function factory() {
+  return new Channel();
 }
 
-factory.version = "{{VERSION}}";
+factory.version = '{{VERSION}}';

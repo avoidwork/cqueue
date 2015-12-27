@@ -35,11 +35,14 @@ module.exports = function (grunt) {
 				}
 			}
 		},
-		eslint: {
-			target: ["lib/<%= pkg.name %>.es6.js"]
-		},
 		nodeunit : {
 			all : ["test/*.js"]
+		},
+		jscs: {
+			src: "lib/<%= pkg.name %>.es6.js",
+			options: {
+				config: ".jscsrc"
+			}
 		},
 		sed : {
 			version : {
@@ -85,10 +88,10 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-contrib-watch");
 	grunt.loadNpmTasks("grunt-contrib-uglify");
 	grunt.loadNpmTasks("grunt-babel");
-	grunt.loadNpmTasks("grunt-eslint");
+	grunt.loadNpmTasks("grunt-jscs");
 
 	// aliases
-	grunt.registerTask("test", ["eslint", "nodeunit"]);
-	grunt.registerTask("build", ["concat", "sed", "babel", "uglify"]);
+	grunt.registerTask("test", ["nodeunit"]);
+	grunt.registerTask("build", ["concat", "sed", "jscs", "babel", "uglify"]);
 	grunt.registerTask("default", ["build", "test"]);
 };
